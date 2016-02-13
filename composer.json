@@ -36,7 +36,7 @@
         "schnittstabil/get": "^1.6"
     },
     "suggest": {
-        "dflydev/fig-cookies": "To protect via Cookies, e.g. MiddlewareBuilder::createCookieToHeaderMiddleware()."
+        "dflydev/fig-cookies": "To protect via Cookies, e.g. MiddlewareBuilder::buildCookieToHeaderMiddleware()."
     },
     "scripts": {
         "clean": "rm -rf build/ coverage/ doc/",

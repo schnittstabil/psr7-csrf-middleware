@@ -20,16 +20,25 @@ require __DIR__.'/vendor/autoload.php';
 
 use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddlewareBuilder;
 
-// Shared secret key used for generating and validating CSRF tokens:
+/*
+ * Shared secret key used for generating and validating CSRF tokens:
+ */
 $key = 'This key is not so secret - change it!';
 
-// build a (AngularJS compatible) stateless Cookie-To-Header CSRF proptection middleware:
-$csrfMiddleware = CsrfMiddlewareBuilder::create($key)
-    ->buildCookieToHeaderMiddleware();
-
-// build a stateless Synchronizer Token Pattern CSRF proptection middleware:
+/*
+ * Build a stateless Synchronizer Token Pattern CSRF proptection middleware.
+ */
 $csrfMiddleware = CsrfMiddlewareBuilder::create($key)
     ->buildSynchronizerTokenPatternMiddleware();
+
+/*
+ * Build a (AngularJS compatible) stateless Cookie-To-Header CSRF proptection middleware.
+ *
+ * Requires additional dependency:
+ *     composer require dflydev/fig-cookies
+ */
+$csrfMiddleware = CsrfMiddlewareBuilder::create($key)
+    ->buildCookieToHeaderMiddleware();
 ?>
 ```
 
