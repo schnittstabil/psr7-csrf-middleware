@@ -92,10 +92,13 @@ $app->run();
 ?>
 ```
 
+
 ## Related
 
-* [schnittstabil/csrf-tokenservice](https://github.com/schnittstabil/csrf-tokenservice) - the underlying (stateless) token service
-* [Slim-Csrf](https://github.com/slimphp/Slim-Csrf) - stateful (session based) CSRF protection
+* [schnittstabil/csrf-tokenservice](https://github.com/schnittstabil/csrf-tokenservice) – the underlying (stateless) token service
+* [schnittstabil/csrf-twig-helpers](https://github.com/schnittstabil/csrf-twig-helpers) – Twig helpers for token rendering
+* [Slim-Csrf](https://github.com/slimphp/Slim-Csrf) – stateful (session based) CSRF protection
+
 
 ## License
 
