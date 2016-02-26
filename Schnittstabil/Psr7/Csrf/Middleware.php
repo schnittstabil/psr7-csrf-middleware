@@ -11,13 +11,15 @@ use Schnittstabil\Psr7\Csrf\Middlewares\Guard;
 use Schnittstabil\Psr7\Csrf\Middlewares\GuardInterface;
 use Schnittstabil\Psr7\Csrf\Middlewares\RespondWithCookieToken;
 use Schnittstabil\Psr7\Csrf\Middlewares\RespondWithHeaderToken;
-use Schnittstabil\Psr7\Middleware\Stack as MiddlewareStack;
+use Schnittstabil\Psr7\Middleware\CallableStackTrait;
 
 /**
  * CSRF protection middleware.
  */
-class Middleware extends MiddlewareStack
+class Middleware implements \Schnittstabil\Psr7\Middleware\StackInterface
 {
+    use CallableStackTrait;
+
     protected $isGuarded;
     protected $tokenService;
 
@@ -28,7 +30,6 @@ class Middleware extends MiddlewareStack
      */
     public function __construct(TokenServiceInterface $tokenService)
     {
-        parent::__construct();
         $this->isGuarded = false;
         $this->tokenService = $tokenService;
     }
@@ -64,10 +65,10 @@ class Middleware extends MiddlewareStack
             }
         }
 
-        $clone = parent::add($newTopMiddleware);
+        $clone = clone $this;
         $clone->isGuarded = true;
 
-        return $clone;
+        return $clone->push($newTopMiddleware);
     }
 
     /**
