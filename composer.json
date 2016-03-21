@@ -1,7 +1,7 @@
 {
     "name": "schnittstabil/psr7-csrf-middleware",
     "type": "library",
-    "description": "Stateless PSR-7 CSRF (Cross-Site Request Forgery) protection middleware.",
+    "description": "Stateless PSR-7 CSRF (Cross-Site Request Forgery) protection middleware - simple Slim Framework 3 integration.",
     "license": "MIT",
     "keywords": [ "csrf", "xsrf", "cross-site request forgery", "session riding", "hmac", "stateless", "psr", "psr7", "psr-7", "middleware", "slim", "expressive", "stratigility", "angularjs" ],
     "homepage": "https://github.com/schnittstabil/psr7-csrf-middleware",
