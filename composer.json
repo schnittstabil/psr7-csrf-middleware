@@ -55,7 +55,7 @@
             "phpmetrics --report-html build/phpmetrics/index.html src/"
         ],
         "lint": [
-            "phpcs -s",
+            "phpcs -s --standard=PSR1,PSR2 src/ tests/",
             "phpmd src text cleancode,codesize,controversial,design,naming,unusedcode",
             "php-cs-fixer fix --dry-run --diff src",
             "php-cs-fixer fix --dry-run --diff tests",

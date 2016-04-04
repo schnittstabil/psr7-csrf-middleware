@@ -110,7 +110,9 @@ class Middleware implements \Schnittstabil\Psr7\Middleware\StackInterface
     /**
      * Add new AcceptParsedBodyToken middleware.
      *
-     * @param string|int|mixed[] $path <a href="https://github.com/schnittstabil/get" target="_blank">See `Get::value` for details</a>
+     * @see https://github.com/schnittstabil/get Documentation of `Schnittstabil\Get\getValue`.
+     *
+     * @param string|int|mixed[] $path a `Schnittstabil\Get\getValue` path
      *
      * @return static
      */

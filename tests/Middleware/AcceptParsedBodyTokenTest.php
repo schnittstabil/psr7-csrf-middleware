@@ -60,7 +60,8 @@ class AcceptParsedBodyTokenTest extends \PHPUnit_Framework_TestCase
         $violationsAttribute = RequestAttributesTrait::$violationsAttribute;
 
         $request = MockFactory::createServerRequestMock($this);
-        $request->method('getParsedBody')->willReturn(simplexml_load_string('<root> <X-XSRF-TOKEN>1</X-XSRF-TOKEN></root>'));
+        $request->method('getParsedBody')
+            ->willReturn(simplexml_load_string('<root> <X-XSRF-TOKEN>1</X-XSRF-TOKEN></root>'));
 
         $sut = new AcceptParsedBodyToken(function ($token) {
             return [];

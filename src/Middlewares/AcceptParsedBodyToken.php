@@ -22,17 +22,19 @@ class AcceptParsedBodyToken
     protected $tokenValidator;
 
     /**
-     * Used to <a href="https://github.com/schnittstabil/get" target="_blank">`Get`</a> the token.
+     * Used to _get_ the token.
      *
-     * @var string|int|mixed[]
+     * @var string|int|mixed[] a `Schnittstabil\Get\getValue` path
      */
     protected $path;
 
     /**
      * Create new AcceptParsedBodyToken middleware.
      *
+     * @see https://github.com/schnittstabil/get Documentation of `Schnittstabil\Get\getValue`.
+     *
      * @param callable           $tokenValidator Used to validate tokens.
-     * @param string|int|mixed[] $path           <a href="https://github.com/schnittstabil/get" target="_blank">See `getValue` for details</a>
+     * @param string|int|mixed[] $path           a `Schnittstabil\Get\getValue` path
      */
     public function __construct(callable $tokenValidator, $path = 'X-XSRF-TOKEN')
     {

@@ -87,7 +87,8 @@ class SlimSTPExampleTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($token);
 
         $appPost = $this->createExampleApp();
-        $appPost->getContainer()['request'] = SlimFixtures::createRequest('POST')->withParsedBody(['X-XSRF-TOKEN' => $token]);
+        $appPost->getContainer()['request'] = SlimFixtures::createRequest('POST')
+            ->withParsedBody(['X-XSRF-TOKEN' => $token]);
         $appPost->getContainer()['response'] = new \Slim\Http\Response();
         $appPost = $appPost->run(true);
 

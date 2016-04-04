@@ -31,6 +31,9 @@ class AcceptHeaderTokenTest extends \PHPUnit_Framework_TestCase
         });
 
         $this->assertSame(false, getValue($isValidAttribute, $request->attributes, false));
-        $this->assertSame(['oldViolation', 'newViolation1', 'newViolation2'], getValue($violationsAttribute, $request->attributes, []));
+        $this->assertSame(
+            ['oldViolation', 'newViolation1', 'newViolation2'],
+            getValue($violationsAttribute, $request->attributes, [])
+        );
     }
 }
