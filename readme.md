@@ -51,7 +51,6 @@ $csrfMiddleware = CsrfMiddlewareBuilder::create($key)
  * Requires additional dependency:
  *     composer require slim/slim
  */
-
 require __DIR__.'/vendor/autoload.php';
 
 use Psr\Http\Message\RequestInterface;

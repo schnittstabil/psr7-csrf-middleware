@@ -2,17 +2,16 @@
 
 namespace Schnittstabil\Psr7\Csrf;
 
-require_once 'SlimFixtures.php';
-
+use Dflydev\FigCookies\FigResponseCookies;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Slim\App;
-use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddlewareBuilder;
+use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddleware;
 
 /**
- * Middleware Slim Synchronizer Token Pattern example tests.
+ * MiddlewareBuilder Slim Cookie-to-Header example tests.
  */
-class SlimSTPExampleTest extends \PHPUnit_Framework_TestCase
+class SlimCookieToHeaderMiddlewareExampleTest extends \PHPUnit_Framework_TestCase
 {
     public function createExampleApp()
     {
@@ -21,31 +20,26 @@ class SlimSTPExampleTest extends \PHPUnit_Framework_TestCase
         ]);
 
         /*
-         * Additional dependencies:
+         * Install dependencies:
          *
          *     composer require slim/slim
+         *     composer require dflydev/fig-cookies
          */
 
         // $app = new App();
 
-        $app->getContainer()['csrf_token_name'] = 'X-XSRF-TOKEN';
-
         $app->getContainer()['csrf'] = function ($c) {
             $key = 'This key is not so secret - change it!';
+            $cookieName = 'XSRF-TOKEN';
+            $headerName = 'X-XSRF-TOKEN';
 
-            return CsrfMiddlewareBuilder::create($key)
-                ->buildSynchronizerTokenPatternMiddleware($c['csrf_token_name']);
+            return CsrfMiddleware::create($key)->buildCookieToHeaderMiddleware($cookieName, $headerName);
         };
 
         $app->add('csrf');
 
         $app->get('/', function (RequestInterface $request, ResponseInterface $response) {
-            $name = $this->csrf_token_name;
-            $token = $this->csrf->getTokenService()->generate();
-
-            // render HTML...
-            $response = $response->write("<input type=\"hidden\" name=\"$name\" value=\"$token\" />");
-
+            // Render some Cookie-To-Header aware application, like AngularJS.
             return $response->write('successfully GET!');
         });
 
@@ -77,12 +71,12 @@ class SlimSTPExampleTest extends \PHPUnit_Framework_TestCase
         $appGet->getContainer()['response'] = new \Slim\Http\Response();
         $resGet = $appGet->run(true);
 
-        preg_match('/value="([^"]+)"/i', (string) $resGet->getBody(), $matches);
-        $token = $matches[1];
+        $this->assertContains('successfully GET', (string) $resGet->getBody(), '', true);
+        $token = FigResponseCookies::get($resGet, 'XSRF-TOKEN', null)->getValue();
         $this->assertNotNull($token);
 
         $appPost = $this->createExampleApp();
-        $appPost->getContainer()['request'] = SlimFixtures::createRequest('POST')->withParsedBody(['X-XSRF-TOKEN' => $token]);
+        $appPost->getContainer()['request'] = SlimFixtures::createRequest('POST')->withHeader('X-XSRF-TOKEN', $token);
         $appPost->getContainer()['response'] = new \Slim\Http\Response();
         $appPost = $appPost->run(true);
 

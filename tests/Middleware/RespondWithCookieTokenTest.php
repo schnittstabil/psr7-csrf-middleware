@@ -2,8 +2,6 @@
 
 namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
-require_once __DIR__.'/../MockFactory.php';
-
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
 use Schnittstabil\Psr7\Csrf\MockFactory;

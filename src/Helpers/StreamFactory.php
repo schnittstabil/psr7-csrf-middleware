@@ -27,6 +27,8 @@ class StreamFactory
      * Set the stream factory.
      *
      * @param callable $factory the new stream factory.
+     *
+     * @return callable
      */
     public static function set(callable $factory)
     {

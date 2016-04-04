@@ -2,8 +2,6 @@
 
 namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
-require_once __DIR__.'/../MockFactory.php';
-
 use Schnittstabil\Psr7\Csrf\MockFactory;
 use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<ruleset name="Schnittstabil Ruleset">
+<ruleset name="Ruleset">
   <file>sami_configuration.php</file>
+  <file>src</file>
   <file>tests</file>
-  <file>Schnittstabil</file>
 
   <rule ref="PEAR">
     <exclude name="Generic.Files.LineLength" />
@@ -14,11 +14,6 @@
     <exclude name="PEAR.Commenting.ClassComment.MissingAuthorTag" />
     <exclude name="PEAR.Commenting.ClassComment.MissingLicenseTag" />
     <exclude name="PEAR.Commenting.ClassComment.MissingLinkTag" />
-  </rule>
-
-  <!-- Schnittstabil -->
-  <rule ref="PEAR.Commenting.FunctionComment.MissingReturn">
-    <exclude-pattern>Schnittstabil/Psr7/Csrf/Helpers/StreamFactory.php</exclude-pattern>
   </rule>
 
   <!-- tests -->

@@ -2,8 +2,6 @@
 
 namespace Schnittstabil\Psr7\Csrf;
 
-require_once 'MockFactory.php';
-
 use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddlewareBuilder;
 
 /**

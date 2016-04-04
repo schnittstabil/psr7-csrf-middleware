@@ -8,8 +8,6 @@ use Sami\Reflection\MethodReflection;
 use Sami\Reflection\PropertyReflection;
 use Symfony\Component\Finder\Finder;
 
-$dir = 'Schnittstabil';
-
 $composerJson = json_decode(file_get_contents(dirname(__FILE__).'/composer.json', true));
 
 $title = strtr(ucwords(strtr($composerJson->name, '/-', '  ')), ' ', '\\').' API';
@@ -17,13 +15,13 @@ $title = strtr(ucwords(strtr($composerJson->name, '/-', '  ')), ' ', '\\').' API
 $iterator = Finder::create()
     ->files()
     ->name('*.php')
-    ->in($dir);
+    ->in('src');
 
 $sami = new Sami(
     $iterator,
     array(
         'title' => $title,
-        'build_dir' => __DIR__.'/doc',
+        'build_dir' => __DIR__.'/build/doc',
         'cache_dir' => __DIR__.'/build/cache',
         'default_opened_level' => 2,
     )

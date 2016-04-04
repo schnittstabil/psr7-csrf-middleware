@@ -2,8 +2,6 @@
 
 namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
-require_once __DIR__.'/../MockFactory.php';
-
 use Psr\Http\Message\ResponseInterface;
 use function Schnittstabil\Get\getValue;
 use Schnittstabil\Psr7\Csrf\MockFactory;
