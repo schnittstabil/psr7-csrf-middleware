@@ -5,7 +5,7 @@ namespace Schnittstabil\Psr7\Csrf\Middlewares;
 require_once __DIR__.'/../MockFactory.php';
 
 use Psr\Http\Message\ResponseInterface;
-use Schnittstabil\Get;
+use function Schnittstabil\Get\getValue;
 use Schnittstabil\Psr7\Csrf\MockFactory;
 use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
 
@@ -32,8 +32,8 @@ class AcceptParsedBodyTokenTest extends \PHPUnit_Framework_TestCase
             return $res;
         });
 
-        $this->assertSame([], Get::value($violationsAttribute, $request->attributes, []));
-        $this->assertSame(true, Get::value($isValidAttribute, $request->attributes, false));
+        $this->assertSame([], getValue($violationsAttribute, $request->attributes, []));
+        $this->assertSame(true, getValue($isValidAttribute, $request->attributes, false));
     }
 
     public function testMiddlewareShouldAcceptObjects()
@@ -52,8 +52,8 @@ class AcceptParsedBodyTokenTest extends \PHPUnit_Framework_TestCase
             return $res;
         });
 
-        $this->assertSame([], Get::value($violationsAttribute, $request->attributes, []));
-        $this->assertSame(true, Get::value($isValidAttribute, $request->attributes, false));
+        $this->assertSame([], getValue($violationsAttribute, $request->attributes, []));
+        $this->assertSame(true, getValue($isValidAttribute, $request->attributes, false));
     }
 
     public function testMiddlewareShouldAcceptSimpleXMLElements()
@@ -72,8 +72,8 @@ class AcceptParsedBodyTokenTest extends \PHPUnit_Framework_TestCase
             return $res;
         });
 
-        $this->assertSame([], Get::value($violationsAttribute, $request->attributes, []));
-        $this->assertSame(true, Get::value($isValidAttribute, $request->attributes, false));
+        $this->assertSame([], getValue($violationsAttribute, $request->attributes, []));
+        $this->assertSame(true, getValue($isValidAttribute, $request->attributes, false));
     }
 
     public function testMiddlewareShouldPreserveViolations()

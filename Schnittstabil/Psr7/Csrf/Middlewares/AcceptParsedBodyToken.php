@@ -4,7 +4,7 @@ namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Schnittstabil\Get;
+use function Schnittstabil\Get\getValue;
 use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
 
 /**
@@ -32,7 +32,7 @@ class AcceptParsedBodyToken
      * Create new AcceptParsedBodyToken middleware.
      *
      * @param callable           $tokenValidator Used to validate tokens.
-     * @param string|int|mixed[] $path           <a href="https://github.com/schnittstabil/get" target="_blank">See `Get::value` for details</a>
+     * @param string|int|mixed[] $path           <a href="https://github.com/schnittstabil/get" target="_blank">See `getValue` for details</a>
      */
     public function __construct(callable $tokenValidator, $path = 'X-XSRF-TOKEN')
     {
@@ -48,12 +48,10 @@ class AcceptParsedBodyToken
      * @param callable               $next     next middleware
      *
      * @return ResponseInterface response object
-     *
-     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
     {
-        $token = Get::value($this->path, $request->getParsedBody(), null);
+        $token = getValue($this->path, $request->getParsedBody(), null);
 
         if ($token === null) {
             return $next($request, $response);

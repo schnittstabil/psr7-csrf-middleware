@@ -5,7 +5,7 @@ namespace Schnittstabil\Psr7\Csrf;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Schnittstabil\Get;
+use function Schnittstabil\Get\getValue;
 
 /**
  * Mock Factory.
@@ -37,7 +37,7 @@ class MockFactory
         $message->method('getHeader')->will(
             $testCase->returnCallback(
                 function ($name) use ($message) {
-                    return Get::value([$name], $message->headers, []);
+                    return getValue([$name], $message->headers, []);
                 }
             )
         );
@@ -48,7 +48,7 @@ class MockFactory
                     if (!is_array($values)) {
                         $values = [$values];
                     }
-                    $old = Get::value([$name], $message->headers, []);
+                    $old = getValue([$name], $message->headers, []);
                     $message->headers[$name] = array_merge($old, $values);
 
                     return $message;
@@ -65,24 +65,6 @@ class MockFactory
                     $message->headers[$name] = $values;
 
                     return $message;
-                }
-            )
-        );
-
-        $message->method('withStatus')->will(
-            $testCase->returnCallback(
-                function ($status) use ($message) {
-                    $message->status = $status;
-
-                    return $message;
-                }
-            )
-        );
-
-        $message->method('getStatusCode')->will(
-            $testCase->returnCallback(
-                function () use ($message) {
-                    return $message->status;
                 }
             )
         );
@@ -109,6 +91,35 @@ class MockFactory
     }
 
     /**
+     * Mock ResponseInterface methods.
+     *
+     * @param \PHPUnit_Framework_TestCase $testCase the test case
+     * @param MessageInterface            $message  the message
+     *
+     * @return MessageInterface
+     */
+    protected static function responseMixins(\PHPUnit_Framework_TestCase $testCase, MessageInterface $message)
+    {
+        $message->method('withStatus')->will(
+            $testCase->returnCallback(
+                function ($status) use ($message) {
+                    $message->status = $status;
+
+                    return $message;
+                }
+            )
+        );
+
+        $message->method('getStatusCode')->will(
+            $testCase->returnCallback(
+                function () use ($message) {
+                    return $message->status;
+                }
+            )
+        );
+    }
+
+    /**
      * Create a ServerRequestInterface Mock.
      *
      * @param \PHPUnit_Framework_TestCase $testCase the test case
@@ -124,7 +135,7 @@ class MockFactory
         $request->method('getAttribute')->will(
             $testCase->returnCallback(
                 function ($name, $default = null) use ($request) {
-                    return Get::value([$name], $request->attributes, $default);
+                    return getValue([$name], $request->attributes, $default);
                 }
             )
         );
@@ -153,6 +164,7 @@ class MockFactory
     {
         $response = $testCase->getMock(ResponseInterface::class);
         self::messageMixins($testCase, $response);
+        self::responseMixins($testCase, $response);
 
         return $response;
     }

@@ -5,7 +5,7 @@ namespace Schnittstabil\Psr7\Csrf\Middlewares;
 require_once __DIR__.'/../MockFactory.php';
 
 use Psr\Http\Message\ResponseInterface;
-use Schnittstabil\Get;
+use function Schnittstabil\Get\getValue;
 use Schnittstabil\Psr7\Csrf\MockFactory;
 use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
 
@@ -32,7 +32,7 @@ class AcceptHeaderTokenTest extends \PHPUnit_Framework_TestCase
             return $res;
         });
 
-        $this->assertSame(false, Get::value($isValidAttribute, $request->attributes, false));
-        $this->assertSame(['oldViolation', 'newViolation1', 'newViolation2'], Get::value($violationsAttribute, $request->attributes, []));
+        $this->assertSame(false, getValue($isValidAttribute, $request->attributes, false));
+        $this->assertSame(['oldViolation', 'newViolation1', 'newViolation2'], getValue($violationsAttribute, $request->attributes, []));
     }
 }

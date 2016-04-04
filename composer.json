@@ -14,12 +14,19 @@
     "autoload": {
         "psr-4": { "Schnittstabil\\": "Schnittstabil" }
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/schnittstabil/pdepend.git"
+        }
+    ],
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.2.0",
         "dflydev/fig-cookies": "^1.0",
         "fabpot/php-cs-fixer": "^1.10",
         "halleck45/phpmetrics": "^1.8",
         "phpmd/phpmd": "^2.3",
+        "pdepend/pdepend": "dev-fix-namespaced-consts-and-functions as 2.0",
         "phpunit/phpunit": "^5.0",
         "sami/sami": "^3.1",
         "satooshi/php-coveralls": "^0.6.1",
@@ -33,7 +40,7 @@
         "psr/http-message": "^1.0",
         "schnittstabil/csrf-tokenservice": "^1.0",
         "schnittstabil/psr7-middleware-stack": "^2.0",
-        "schnittstabil/get": "^1.6"
+        "schnittstabil/get": "^2.0"
     },
     "suggest": {
         "dflydev/fig-cookies": "To protect via Cookies, e.g. MiddlewareBuilder::buildCookieToHeaderMiddleware()."
