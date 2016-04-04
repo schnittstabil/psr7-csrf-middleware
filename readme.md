@@ -48,8 +48,7 @@ $csrfMiddleware = CsrfMiddlewareBuilder::create($key)
 ```php
 <?php
 /*
- * Additional dependencies:
- *
+ * Requires additional dependency:
  *     composer require slim/slim
  */
 
@@ -62,17 +61,21 @@ use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddlewareBuilder;
 
 $app = new App();
 
+/*
+ * CSRF protection setup
+ */
 $app->getContainer()['csrf_token_name'] = 'X-XSRF-TOKEN';
-
 $app->getContainer()['csrf'] = function ($c) {
     $key = 'This key is not so secret - change it!';
 
     return CsrfMiddlewareBuilder::create($key)
         ->buildSynchronizerTokenPatternMiddleware($c['csrf_token_name']);
 };
-
 $app->add('csrf');
 
+/*
+ * GET routes are not protected (by default)
+ */
 $app->get('/', function (RequestInterface $request, ResponseInterface $response) {
     $name = $this->csrf_token_name;
     $token = $this->csrf->getTokenService()->generate();
@@ -83,11 +86,16 @@ $app->get('/', function (RequestInterface $request, ResponseInterface $response)
     return $response->write('successfully GET!');
 });
 
+/*
+ * POST routes are protected (by default; same applies to PUT, DELETE and PATCH)
+ */
 $app->post('/', function (RequestInterface $request, ResponseInterface $response) {
-    // POST, PUT, DELETE and PATCH are protected by default
     return $response->write('successfully POST');
 });
 
+/*
+ * Run application
+ */
 $app->run();
 ?>
 ```
