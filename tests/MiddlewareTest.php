@@ -2,7 +2,7 @@
 
 namespace Schnittstabil\Psr7\Csrf;
 
-use Schnittstabil\Csrf\TokenServiceInterface;
+use Schnittstabil\Csrf\TokenService\TokenServiceInterface;
 use Schnittstabil\Psr7\Csrf\Middlewares\GuardInterface;
 
 /**

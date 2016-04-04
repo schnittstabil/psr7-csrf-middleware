@@ -2,8 +2,8 @@
 
 namespace Schnittstabil\Psr7\Csrf;
 
-use Schnittstabil\Csrf\TokenService;
-use Schnittstabil\Csrf\TokenServiceInterface;
+use Schnittstabil\Csrf\TokenService\TokenService;
+use Schnittstabil\Csrf\TokenService\TokenServiceInterface;
 
 /**
  * CSRF protection middleware builder.

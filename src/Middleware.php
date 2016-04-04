@@ -2,8 +2,8 @@
 
 namespace Schnittstabil\Psr7\Csrf;
 
-use Schnittstabil\Csrf\TokenService;
-use Schnittstabil\Csrf\TokenServiceInterface;
+use Schnittstabil\Csrf\TokenService\TokenService;
+use Schnittstabil\Csrf\TokenService\TokenServiceInterface;
 use Schnittstabil\Psr7\Csrf\Middlewares\AcceptHeaderToken;
 use Schnittstabil\Psr7\Csrf\Middlewares\AcceptMethods;
 use Schnittstabil\Psr7\Csrf\Middlewares\AcceptParsedBodyToken;
@@ -11,14 +11,15 @@ use Schnittstabil\Psr7\Csrf\Middlewares\Guard;
 use Schnittstabil\Psr7\Csrf\Middlewares\GuardInterface;
 use Schnittstabil\Psr7\Csrf\Middlewares\RespondWithCookieToken;
 use Schnittstabil\Psr7\Csrf\Middlewares\RespondWithHeaderToken;
-use Schnittstabil\Psr7\Middleware\CallableStackTrait;
+use Schnittstabil\Psr7\MiddlewareStack\CallableMiddlewareStackTrait;
+use Schnittstabil\Psr7\MiddlewareStack\MiddlewareStackInterface;
 
 /**
  * CSRF protection middleware.
  */
-class Middleware implements \Schnittstabil\Psr7\Middleware\StackInterface
+class Middleware implements MiddlewareStackInterface
 {
-    use CallableStackTrait;
+    use CallableMiddlewareStackTrait;
 
     protected $isGuarded;
     protected $tokenService;

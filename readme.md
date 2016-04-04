@@ -2,7 +2,7 @@
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/189bdd73-5c9b-489f-bdd9-a4d139250502/big.png)](https://insight.sensiolabs.com/projects/189bdd73-5c9b-489f-bdd9-a4d139250502)
 
-> Stateless PSR-7 CSRF (Cross-Site Request Forgery) protection middleware - simple Slim Framework 3 integration.
+> Stateless PSR-7 CSRF (Cross-Site Request Forgery) protection middleware :lock_with_ink_pen:
 
 
 ## Install
@@ -43,7 +43,9 @@ $csrfMiddleware = CsrfMiddlewareBuilder::create($key)
 ```
 
 
-### Slim Example
+### Slim v3 Example
+
+* See [csrf-twig-helpers](https://github.com/schnittstabil/csrf-twig-helpers) for complete Slim-Twig Examples.
 
 ```php
 <?php
