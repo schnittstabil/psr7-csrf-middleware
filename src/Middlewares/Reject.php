@@ -21,7 +21,7 @@ class Reject
     /**
      * Create new Reject middleware.
      *
-     * @param callable $streamFactory Defaults to `new StreamFactory`.
+     * @param callable $streamFactory Defaults to `new StreamFactory`
      */
     public function __construct(callable $streamFactory = null)
     {

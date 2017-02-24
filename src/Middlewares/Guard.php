@@ -23,7 +23,7 @@ class Guard implements GuardInterface
     /**
      * Create new Guard middleware.
      *
-     * @param callable $rejectMiddleware Defaults to `new Reject()`.
+     * @param callable $rejectMiddleware Defaults to `new Reject()`
      */
     public function __construct(callable $rejectMiddleware = null)
     {

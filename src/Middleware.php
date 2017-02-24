@@ -27,7 +27,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Create a new Middleware.
      *
-     * @param TokenServiceInterface $tokenService A token service.
+     * @param TokenServiceInterface $tokenService A token service
      */
     public function __construct(TokenServiceInterface $tokenService)
     {
@@ -48,7 +48,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Push a middleware onto the top of a new Stack instance.
      *
-     * @param callable $newTopMiddleware the middleware to be pushed onto the top.
+     * @param callable $newTopMiddleware the middleware to be pushed onto the top
      *
      * @return static the new instance
      *
@@ -75,7 +75,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Add new Guard middleware.
      *
-     * @param callable $rejectMiddleware Defaults to `new Reject()`.
+     * @param callable $rejectMiddleware Defaults to `new Reject()`
      *
      * @return static
      */
@@ -87,7 +87,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Add new AcceptHeaderToken middleware.
      *
-     * @param string $headerName Header field name.
+     * @param string $headerName Header field name
      *
      * @return static
      */
@@ -99,7 +99,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Add new AcceptMethods middleware.
      *
-     * @param string[] $methods HTTP methods allowed to bypass CSRF protection.
+     * @param string[] $methods HTTP methods allowed to bypass CSRF protection
      *
      * @return static
      */
@@ -111,7 +111,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Add new AcceptParsedBodyToken middleware.
      *
-     * @see https://github.com/schnittstabil/get Documentation of `Schnittstabil\Get\getValue`.
+     * @see https://github.com/schnittstabil/get Documentation of `Schnittstabil\Get\getValue`
      *
      * @param string|int|mixed[] $path a `Schnittstabil\Get\getValue` path
      *
@@ -125,8 +125,8 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Add new RespondWithCookieToken middleware.
      *
-     * @param string   $cookieName Cookie name.
-     * @param callable $modify     Allows to modify the cookie; same signature as `$this->modifyCookie`.
+     * @param string   $cookieName Cookie name
+     * @param callable $modify     Allows to modify the cookie; same signature as `$this->modifyCookie`
      *
      * @return static
      */
@@ -138,7 +138,7 @@ class Middleware implements MiddlewareStackInterface
     /**
      * Add new RespondWithHeaderToken middleware.
      *
-     * @param string $headerName Header field name.
+     * @param string $headerName Header field name
      *
      * @return static
      */

@@ -27,8 +27,8 @@ class RespondWithHeaderToken
     /**
      * Create new RespondWithHeaderToken middleware.
      *
-     * @param callable $tokenGenerator Used to generate tokens.
-     * @param string   $headerName     Header field name.
+     * @param callable $tokenGenerator Used to generate tokens
+     * @param string   $headerName     Header field name
      */
     public function __construct(callable $tokenGenerator, $headerName = 'XSRF-TOKEN')
     {

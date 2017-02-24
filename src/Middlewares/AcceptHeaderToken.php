@@ -30,8 +30,8 @@ class AcceptHeaderToken
     /**
      * Create new AcceptHeaderToken middleware.
      *
-     * @param callable $tokenValidator Used to validate tokens.
-     * @param string   $headerName     Header field name.
+     * @param callable $tokenValidator Used to validate tokens
+     * @param string   $headerName     Header field name
      */
     public function __construct(callable $tokenValidator, $headerName = 'X-XSRF-TOKEN')
     {

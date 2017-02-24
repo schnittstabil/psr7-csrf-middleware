@@ -31,9 +31,9 @@ class AcceptParsedBodyToken
     /**
      * Create new AcceptParsedBodyToken middleware.
      *
-     * @see https://github.com/schnittstabil/get Documentation of `Schnittstabil\Get\getValue`.
+     * @see https://github.com/schnittstabil/get Documentation of `Schnittstabil\Get\getValue`
      *
-     * @param callable           $tokenValidator Used to validate tokens.
+     * @param callable           $tokenValidator Used to validate tokens
      * @param string|int|mixed[] $path           a `Schnittstabil\Get\getValue` path
      */
     public function __construct(callable $tokenValidator, $path = 'X-XSRF-TOKEN')

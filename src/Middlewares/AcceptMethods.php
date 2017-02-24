@@ -23,7 +23,7 @@ class AcceptMethods
     /**
      * Create new AcceptMethods middleware.
      *
-     * @param string[] $methods HTTP methods allowed to bypass CSRF protection.
+     * @param string[] $methods HTTP methods allowed to bypass CSRF protection
      */
     public function __construct(array $methods = array('GET', 'OPTIONS'))
     {

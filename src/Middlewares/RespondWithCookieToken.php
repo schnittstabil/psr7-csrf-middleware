@@ -36,9 +36,9 @@ class RespondWithCookieToken
     /**
      * Create new RespondWithCookieToken middleware.
      *
-     * @param callable $tokenGenerator Used to generate tokens.
-     * @param string   $cookieName     Cookie name.
-     * @param callable $modify         Allows to modify the cookie; same signature as `$this->modifyCookie`.
+     * @param callable $tokenGenerator Used to generate tokens
+     * @param string   $cookieName     Cookie name
+     * @param callable $modify         Allows to modify the cookie; same signature as `$this->modifyCookie`
      */
     public function __construct(callable $tokenGenerator, $cookieName = 'XSRF-TOKEN', callable $modify = null)
     {
@@ -78,7 +78,7 @@ class RespondWithCookieToken
      * @param ResponseInterface      $response  response object
      * @param SetCookie              $setCookie the cookie to modify
      *
-     * @return SetCookie the modified cookie.
+     * @return SetCookie the modified cookie
      */
     protected function modifyCookie(ServerRequestInterface $request, ResponseInterface $response, SetCookie $setCookie)
     {

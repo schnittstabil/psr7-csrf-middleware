@@ -14,7 +14,7 @@ class StreamFactory
     /**
      * Create a Stream.
      *
-     * @throws \RuntimeException if no factory is set.
+     * @throws \RuntimeException if no factory is set
      *
      * @return StreamInterface
      */
@@ -26,7 +26,7 @@ class StreamFactory
     /**
      * Set the stream factory.
      *
-     * @param callable $factory the new stream factory.
+     * @param callable $factory the new stream factory
      *
      * @return callable
      */
@@ -38,7 +38,7 @@ class StreamFactory
     /**
      * Get a stream factory.
      *
-     * @throws \RuntimeException if no factory is set.
+     * @throws \RuntimeException if no factory is set
      *
      * @return callable
      */
@@ -54,7 +54,7 @@ class StreamFactory
     /**
      * Create a Stream.
      *
-     * @throws \RuntimeException if no factory is set.
+     * @throws \RuntimeException if no factory is set
      *
      * @return StreamInterface
      */
@@ -86,7 +86,7 @@ class StreamFactory
     /**
      * Try to autodetect a stream factory.
      *
-     * @throws \RuntimeException if no factory is found.
+     * @throws \RuntimeException if no factory is found
      *
      * @return StreamInterface
      */
