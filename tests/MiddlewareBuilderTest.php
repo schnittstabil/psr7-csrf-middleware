@@ -6,21 +6,22 @@ use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddlewareBuilder;
 
 /**
  * MiddlewareBuilder example tests.
+ *
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class MiddlewareBuilderTest extends \PHPUnit_Framework_TestCase
+class MiddlewareBuilderTest extends \PHPUnit\Framework\TestCase
 {
+    use MockFactoryTrait;
+
     public function testCreateHeaderToHeaderMiddlewareShouldReturnMiddleware()
     {
-        $request = MockFactory::createServerRequestMock($this);
-        $response = MockFactory::createResponseMock($this);
+        $request = $this->createServerRequestMock();
+        $response = $this->createResponseMock();
         $key = 'This key is not so secret - change it!';
 
         $sut = CsrfMiddlewareBuilder::create($key)->buildHeaderToHeaderMiddleware();
 
         $response = $sut($request, $response, function ($req, $res) {
-            $isValidAttribute = RequestAttributesTrait::$isValidAttribute;
-            $violationsAttribute = RequestAttributesTrait::$violationsAttribute;
-
             return $res;
         });
 

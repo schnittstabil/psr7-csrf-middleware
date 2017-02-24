@@ -8,8 +8,10 @@ use Zend\Diactoros\Stream as ZendStream;
 
 /**
  * StreamFactory tests.
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
  */
-class StreamFactoryTest extends \PHPUnit_Framework_TestCase
+class StreamFactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function testCreateZendDiactorosStreamShouldReturnStream()
     {

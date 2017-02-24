@@ -3,19 +3,28 @@ language: php
 php:
   - 5.6
   - 7
+  - 7.0
+  - 7.1
   - hhvm
 
 sudo: false
 
 install:
-  - composer install --no-interaction
+  - composer selfupdate
+  - composer install
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then composer require codeclimate/php-test-reporter satooshi/php-coveralls; fi
+
 
 script:
-  - composer test
+  - composer travis
 
 after_success:
-  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then travis_retry vendor/bin/test-reporter; fi
-  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then travis_retry vendor/bin/coveralls -v; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then vendor/bin/test-reporter; fi
+  - if [ "$TRAVIS_PHP_VERSION" == "5.6" ]; then vendor/bin/coveralls -v; fi
+
+matrix:
+  allow_failures:
+    - php: hhvm
 
 addons:
   code_climate:

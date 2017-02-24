@@ -2,24 +2,22 @@
 
 namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
-use Schnittstabil\Psr7\Csrf\MockFactory;
-use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
+use Schnittstabil\Psr7\Csrf\MockFactoryTrait;
 
 /**
  * Guard tests.
  */
-class GuardTest extends \PHPUnit_Framework_TestCase
+class GuardTest extends \PHPUnit\Framework\TestCase
 {
+    use MockFactoryTrait;
+
     public function testMiddlewareShouldRejectAllRequests()
     {
-        $isValidAttribute = RequestAttributesTrait::$isValidAttribute;
-        $violationsAttribute = RequestAttributesTrait::$violationsAttribute;
-
-        $request = MockFactory::createServerRequestMock($this);
-        $response = MockFactory::createResponseMock($this);
+        $request = $this->createServerRequestMock();
+        $response = $this->createResponseMock();
         $sut = new Guard();
 
-        $res = $sut($request, $response, function ($req, $res) {
+        $res = $sut($request, $response, function () {
             $this->assertTrue(false);
         });
 

@@ -4,21 +4,22 @@ namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
 use Dflydev\FigCookies\FigResponseCookies;
 use Dflydev\FigCookies\SetCookie;
-use Schnittstabil\Psr7\Csrf\MockFactory;
-use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
+use Schnittstabil\Psr7\Csrf\MockFactoryTrait;
 
 /**
  * RespondWithCookieToken tests.
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class RespondWithCookieTokenTest extends \PHPUnit_Framework_TestCase
+class RespondWithCookieTokenTest extends \PHPUnit\Framework\TestCase
 {
+    use MockFactoryTrait;
+
     public function testMiddlewareShouldRespondWithCookie()
     {
-        $isValidAttribute = RequestAttributesTrait::$isValidAttribute;
-        $violationsAttribute = RequestAttributesTrait::$violationsAttribute;
-
-        $request = MockFactory::createServerRequestMock($this);
-        $response = MockFactory::createResponseMock($this);
+        $request = $this->createServerRequestMock();
+        $response = $this->createResponseMock();
 
         $sut = new RespondWithCookieToken(function () {
             return 'signed.token';
@@ -36,11 +37,8 @@ class RespondWithCookieTokenTest extends \PHPUnit_Framework_TestCase
 
     public function testMiddlewareShouldAllowModifyCookie()
     {
-        $isValidAttribute = RequestAttributesTrait::$isValidAttribute;
-        $violationsAttribute = RequestAttributesTrait::$violationsAttribute;
-
-        $request = MockFactory::createServerRequestMock($this);
-        $response = MockFactory::createResponseMock($this);
+        $request = $this->createServerRequestMock();
+        $response = $this->createResponseMock();
 
         $response = FigResponseCookies::modify(
             $response,

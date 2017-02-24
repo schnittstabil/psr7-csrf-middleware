@@ -2,17 +2,21 @@
 
 namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
-use Schnittstabil\Psr7\Csrf\MockFactory;
+use Schnittstabil\Psr7\Csrf\MockFactoryTrait;
 
 /**
  * RespondWithHeaderToken tests.
+ *
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class RespondWithHeaderTokenTest extends \PHPUnit_Framework_TestCase
+class RespondWithHeaderTokenTest extends \PHPUnit\Framework\TestCase
 {
+    use MockFactoryTrait;
+
     public function testMiddlewareShouldRespondWithHeader()
     {
-        $request = MockFactory::createServerRequestMock($this);
-        $response = MockFactory::createResponseMock($this);
+        $request = $this->createServerRequestMock();
+        $response = $this->createResponseMock();
 
         $sut = new RespondWithHeaderToken(function () {
             return 'signed.token';

@@ -9,8 +9,11 @@ use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddlewareBuilder;
 
 /**
  * Middleware Slim Synchronizer Token Pattern example tests.
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings(PHPMD.ShortVariable)
  */
-class SlimSTPExampleTest extends \PHPUnit_Framework_TestCase
+class SlimSTPExampleTest extends \PHPUnit\Framework\TestCase
 {
     public function createExampleApp()
     {

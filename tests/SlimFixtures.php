@@ -21,6 +21,8 @@ class SlimFixtures
      * @param string $uri    the REQUEST_URI
      *
      * @return Request
+     *
+     * @SuppressWarnings(PHPMD.StaticAccess)
      */
     public static function createRequest($method = 'GET', $script = '/index.php', $uri = '/')
     {

@@ -4,20 +4,25 @@ namespace Schnittstabil\Psr7\Csrf\Middlewares;
 
 use Psr\Http\Message\ResponseInterface;
 use function Schnittstabil\Get\getValue;
-use Schnittstabil\Psr7\Csrf\MockFactory;
+use Schnittstabil\Psr7\Csrf\MockFactoryTrait;
 use Schnittstabil\Psr7\Csrf\RequestAttributesTrait;
 
 /**
  * AcceptHeaderToken tests.
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
  */
-class AcceptHeaderTokenTest extends \PHPUnit_Framework_TestCase
+class AcceptHeaderTokenTest extends \PHPUnit\Framework\TestCase
 {
+    use MockFactoryTrait;
+
     public function testMiddlewareShouldPreserveViolations()
     {
         $isValidAttribute = RequestAttributesTrait::$isValidAttribute;
         $violationsAttribute = RequestAttributesTrait::$violationsAttribute;
 
-        $request = MockFactory::createServerRequestMock($this);
+        $request = $this->createServerRequestMock();
         $request->attributes[$isValidAttribute] = false;
         $request->attributes[$violationsAttribute] = ['oldViolation'];
         $request->headers['X-XSRF-TOKEN'] = ['1', '2'];
@@ -26,7 +31,7 @@ class AcceptHeaderTokenTest extends \PHPUnit_Framework_TestCase
             return ['newViolation'.$token];
         });
 
-        $sut($request, $this->getMock(ResponseInterface::class), function ($req, $res) {
+        $sut($request, $this->createMock(ResponseInterface::class), function ($req, $res) {
             return $res;
         });
 

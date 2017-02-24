@@ -8,32 +8,28 @@ use Schnittstabil\Psr7\Csrf\Middlewares\GuardInterface;
 /**
  * Middleware example tests.
  */
-class MiddlewareTest extends \PHPUnit_Framework_TestCase
+class MiddlewareTest extends \PHPUnit\Framework\TestCase
 {
-    use \VladaHejda\AssertException;
-
     public function testUnguardedAddShouldThrowOnNonGuard()
     {
-        $sut = new Middleware($this->getMock(TokenServiceInterface::class));
+        $sut = new Middleware($this->createMock(TokenServiceInterface::class));
+        $this->expectException(\RuntimeException::class);
 
-        $this->assertException(function () use ($sut) {
-            $sut->add(function () {
-            });
-        }, \RuntimeException::class);
+        $sut->add(function () {
+        });
     }
 
     public function testGuardedAddShouldThrowOnGuard()
     {
-        $sut = new Middleware($this->getMock(TokenServiceInterface::class));
-        $guard1 = $this->getMock(GuardInterface::class);
-        $guard2 = $this->getMock(GuardInterface::class);
+        $sut = new Middleware($this->createMock(TokenServiceInterface::class));
+        $guard1 = $this->createMock(GuardInterface::class);
+        $guard2 = $this->createMock(GuardInterface::class);
 
         $sut = $sut->add($guard1);
         $sut = $sut->add(function () {
         });
 
-        $this->assertException(function () use ($sut, $guard2) {
-            $sut->add($guard2);
-        }, \RuntimeException::class);
+        $this->expectException(\RuntimeException::class);
+        $sut->add($guard2);
     }
 }

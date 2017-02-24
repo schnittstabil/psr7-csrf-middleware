@@ -10,8 +10,12 @@ use Schnittstabil\Psr7\Csrf\MiddlewareBuilder as CsrfMiddleware;
 
 /**
  * MiddlewareBuilder Slim Cookie-to-Header example tests.
+ *
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+ * @SuppressWarnings(PHPMD.ShortVariable)
  */
-class SlimCookieToHeaderMiddlewareExampleTest extends \PHPUnit_Framework_TestCase
+class SlimCookieToHeaderMiddlewareExampleTest extends \PHPUnit\Framework\TestCase
 {
     public function createExampleApp()
     {

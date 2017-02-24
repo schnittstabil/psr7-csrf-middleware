@@ -2,6 +2,7 @@
 
 namespace Schnittstabil\Psr7\Csrf;
 
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,22 +11,21 @@ use function Schnittstabil\Get\getValue;
 /**
  * Mock Factory.
  */
-class MockFactory
+trait MockFactoryTrait
 {
     /**
      * Mock MessageInterface methods.
      *
-     * @param \PHPUnit_Framework_TestCase $testCase the test case
-     * @param MessageInterface            $message  the message
+     * @param MessageInterface $message the message
      *
      * @return MessageInterface
      */
-    protected static function messageMixins(\PHPUnit_Framework_TestCase $testCase, MessageInterface $message)
+    protected function messageMixins(MessageInterface $message)
     {
         $message->headers = [];
 
         $message->method('withoutHeader')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($name) use ($message) {
                     unset($message->headers[$name]);
 
@@ -35,7 +35,7 @@ class MockFactory
         );
 
         $message->method('getHeader')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($name) use ($message) {
                     return getValue([$name], $message->headers, []);
                 }
@@ -43,7 +43,7 @@ class MockFactory
         );
 
         $message->method('withAddedHeader')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($name, $values) use ($message) {
                     if (!is_array($values)) {
                         $values = [$values];
@@ -57,7 +57,7 @@ class MockFactory
         );
 
         $message->method('withHeader')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($name, $values) use ($message) {
                     if (!is_array($values)) {
                         $values = [$values];
@@ -70,7 +70,7 @@ class MockFactory
         );
 
         $message->method('getBody')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function () use ($message) {
                     return $message->body;
                 }
@@ -78,7 +78,7 @@ class MockFactory
         );
 
         $message->method('withBody')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($body) use ($message) {
                     $message->body = $body;
 
@@ -93,15 +93,15 @@ class MockFactory
     /**
      * Mock ResponseInterface methods.
      *
-     * @param \PHPUnit_Framework_TestCase $testCase the test case
-     * @param MessageInterface            $message  the message
+     * @param TestCase         $testCase the test case
+     * @param MessageInterface $message  the message
      *
      * @return MessageInterface
      */
-    protected static function responseMixins(\PHPUnit_Framework_TestCase $testCase, MessageInterface $message)
+    protected function responseMixins(MessageInterface $message)
     {
         $message->method('withStatus')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($status) use ($message) {
                     $message->status = $status;
 
@@ -111,7 +111,7 @@ class MockFactory
         );
 
         $message->method('getStatusCode')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function () use ($message) {
                     return $message->status;
                 }
@@ -122,18 +122,16 @@ class MockFactory
     /**
      * Create a ServerRequestInterface Mock.
      *
-     * @param \PHPUnit_Framework_TestCase $testCase the test case
-     *
      * @return ServerRequestInterface
      */
-    public static function createServerRequestMock(\PHPUnit_Framework_TestCase $testCase)
+    public function createServerRequestMock()
     {
-        $request = $testCase->getMock(ServerRequestInterface::class);
-        self::messageMixins($testCase, $request);
+        $request = $this->createMock(ServerRequestInterface::class);
+        $this->messageMixins($request);
         $request->attributes = [];
 
         $request->method('getAttribute')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($name, $default = null) use ($request) {
                     return getValue([$name], $request->attributes, $default);
                 }
@@ -141,7 +139,7 @@ class MockFactory
         );
 
         $request->method('withAttribute')->will(
-            $testCase->returnCallback(
+            $this->returnCallback(
                 function ($name, $value) use ($request) {
                     $request->attributes[$name] = $value;
 
@@ -156,15 +154,13 @@ class MockFactory
     /**
      * Create a ResponseInterface Mock.
      *
-     * @param \PHPUnit_Framework_TestCase $testCase the test case
-     *
      * @return ResponseInterface
      */
-    public static function createResponseMock(\PHPUnit_Framework_TestCase $testCase)
+    public function createResponseMock()
     {
-        $response = $testCase->getMock(ResponseInterface::class);
-        self::messageMixins($testCase, $response);
-        self::responseMixins($testCase, $response);
+        $response = $this->createMock(ResponseInterface::class);
+        $this->messageMixins($response);
+        $this->responseMixins($response);
 
         return $response;
     }
